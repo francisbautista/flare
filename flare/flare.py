@@ -12,37 +12,39 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def main():
-    argument = sys.argv[1]
-    path = sys.argv[2]
-    switch(argument, path)
-
-def switch(argument, path):
     options = {
-    "new" : new,
     "start": start,
     "stop": stop,
     "remove": remove,
     "--help": docs
     }
-    if argument in options:
-        if argument == "new":
-            return options[argument](path)
+    argument_list = sys.argv
+
+    if len(argument_list) < 3:
+        if argument_list[1] in options:
+            options[argument_list[1]]()
         else:
-            return options[argument]()
+            error()
+    elif len(argument_list) == 3:
+        if argument_list[1] == "new":
+            new(argument_list[2])
+        else:
+            error()
     else:
         error()
 
 def new(path):
     root_path = "{}/{}".format(os.getcwd(), path)
     if not os.path.exists(root_path):
-        create(root_path)
         logging.info('Creating %s', root_path)
         top_level_files = ["LICENSE", "README.md", "requirements.txt"]
         top_level_directories = ["data", "docs", "models", "notebooks", "ref", "reports", "src"]
         data_directories = ["raw", "temp", "prod"]
         src_directories = ["features", "models"]
+        os.mkdir(root_path)
+        create(root_path)
         for f in top_level_files:
-            open(f, 'a').close()
+            open("{}/{}".format(root_path, f), 'a').close()
         for directory in top_level_directories:
             os.mkdir(os.path.join(root_path, directory))
         for directory in data_directories:
@@ -71,14 +73,16 @@ def docs():
 def create(path):
     subprocess.call(["virtualenv {}/venv".format(path)], shell=True)
 
-def remove():
-    subprocess.call(["rm -rf venv"], shell=True)
-
-def start():
-    subprocess.call(["source venv/bin/activate"], shell=True)
-
-def stop():
-    subprocess.call(["deactivate"], shell=True)
+# def remove():
+#     subprocess.call(["rm -rf {}/venv".format(os.getcwd())], shell=True)
+#
+# def start():
+#     os.system("source {}/venv/bin/activate".format(os.getcwd()))
+#     # subprocess.call(["source {}/venv/bin/activate".format(os.getcwd())], shell=True)
+#
+# def stop():
+#     os.system("{} deactivate".format(os.getcwd()))
+#     # subprocess.call(["{} deactivate".format(os.getcwd())], shell=True)
 
 if __name__ == '__main__':
     main()
