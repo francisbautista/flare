@@ -15,7 +15,7 @@ version = re.search(
     ).group(1)
 
 
-with open("README.md", "rb") as f:
+with open("README.rst", "rb") as f:
     long_descr = f.read().decode("utf-8")
 
 setup(
@@ -29,5 +29,5 @@ setup(
     long_description = long_descr,
     author = "Francis Bautista",
     author_email = "francis.bautista07@gmail.com",
-    url = "http://github.com/francisbautista/flare",
+    url = "http://github.com/francisbautista/flare"
     )
