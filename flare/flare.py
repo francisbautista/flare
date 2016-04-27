@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 
 def main():
     options = {
-    "start": start,
-    "stop": stop,
-    "remove": remove,
+    # "start": start,
+    # "stop": stop,
+    # "remove": remove,
     "--help": docs
     }
     argument_list = sys.argv
