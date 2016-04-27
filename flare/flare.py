@@ -16,6 +16,7 @@ def main():
     # "start": start,
     # "stop": stop,
     # "remove": remove,
+    # "update": update,
     "--help": docs
     }
     argument_list = sys.argv
@@ -57,9 +58,8 @@ def new(path):
 def error():
     logging.info('Input is not recognized. Try --help to see documentation.')
 
-def update():
-    subprocess.call(["pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | \
-    xargs -n1 pip install -U"], shell=True)
+# def update():
+#     subprocess.call(["pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"], shell=True)
 
 def docs():
     print("""
