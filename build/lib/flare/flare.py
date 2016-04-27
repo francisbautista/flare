@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Create a Flare project"""
 
-__version__ = "0.0.2"
+__version__ = "0.0.4"
 
 import os
 import sys

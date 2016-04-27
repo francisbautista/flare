@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Create a Flare project"""
 
-__version__ = "0.0.2"
+__version__ = "0.0.4"
 
 import os
 import sys
@@ -26,6 +26,8 @@ def main():
             options[argument_list[1]]()
         else:
             error()
+    elif len(argument_list) == 0:
+        docs()
     elif len(argument_list) == 3:
         if argument_list[1] == "new":
             new(argument_list[2])
