@@ -5,6 +5,8 @@ Flare is a project initializer for Data Scientists.
 
 ![Alt text](/res/directory.png "Sample Directory Structure")
 
+### Getting Started
+
 Run `pip install flare` to get started.
 
 Flare auto-generates a project structure for Python-based data science exploration. It provides a directories for various transformations and stages of data, phases of models, notebooks, and visualizations.
@@ -15,5 +17,6 @@ Run  `flare new <project-name>` to create a new Flare project. Start the Virtual
 
 Utility commands for toggling the Virtualenv is underway.
 
-###License
-See [license](https://github.com/francisbautista/flare/blob/master/LICENSE) 
+### License
+
+See [license](https://github.com/francisbautista/flare/blob/master/LICENSE).
