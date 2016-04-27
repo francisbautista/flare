@@ -14,3 +14,6 @@ Virtualenvs are created for each project to keep system Python packages undistur
 Run  `flare new <project-name>` to create a new Flare project. Start the Virtualenv with `source venv/bin/activate`.
 
 Utility commands for toggling the Virtualenv is underway.
+
+###License
+See [license](https://github.com/francisbautista/flare/blob/master/LICENSE) 
