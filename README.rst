@@ -1,10 +1,10 @@
 Flare
 =====
 
-v 0.0.6
+v 0.0.8
 ~~~~~~~
 
-Flare is a project initializer for Data Scientists. I built Flare to save me time when starting a new data science project.
+Flare is a project initializer for Data Scientists. I built Flare to save myself time when starting a new data science project.
 
 .. figure:: /res/directory.png
    :alt: Sample Directory Structure
@@ -26,7 +26,7 @@ undisturbed.
 Run ``flare new <project-name>`` to create a new Flare project. Start
 the Virtualenv with ``source venv/bin/activate``.
 
-Utility commands for toggling the Virtualenv are underway.
+Utility commands for toggling the Virtualenv are underway using argparse.
 
 License
 ~~~~~~~

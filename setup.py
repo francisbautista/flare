@@ -29,5 +29,8 @@ setup(
     long_description = long_descr,
     author = "Francis Bautista",
     author_email = "francis.bautista07@gmail.com",
-    url = "http://github.com/francisbautista/flare"
+    url = "http://github.com/francisbautista/flare",
+    install_requires=[
+        'argparse'
+    ]
     )
