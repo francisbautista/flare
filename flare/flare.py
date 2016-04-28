@@ -9,39 +9,37 @@ import logging
 import subprocess
 import argparse
 
+# Initialize logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def main():
-    options = {
-    # "start": start,
-    # "stop": stop,
-    # "remove": remove,
-    # "update": update,
-    "--help": docs
-    }
 
+    # Create an argparser to handle Flare switches
     parser = argparse.ArgumentParser(description="Flare Project Builder")
-    # group = parser.add_mutually_exclusive_group()
     parser.add_argument("new", help="Create new Flare project")
-    parser.add_argument("name", help="Create new Flare project")
+    parser.add_argument("name", help="Name your Flare project")
     args = parser.parse_args()
     if args.new:
         new(args.name)
     elif args.update:
         update()
 
-
+# Create a new Flare project structure
 def new(path):
-    root_path = "{}/{}".format(os.getcwd(), path)
+    root_path = "{}/{}".format(os.getcwd(), path) # Set root_path to be w/in current directory
     if not os.path.exists(root_path):
         logging.info('Creating %s', root_path)
+
+        # Initialize directory names
         top_level_files = ["LICENSE", "README.md", "requirements.txt"]
         top_level_directories = ["data", "docs", "models", "notebooks", "ref", "reports", "src"]
         data_directories = ["raw", "temp", "prod"]
         src_directories = ["features", "models"]
         os.mkdir(root_path)
         create(root_path)
+
+        # Create directories
         for f in top_level_files:
             open("{}/{}".format(root_path, f), 'a').close()
         for directory in top_level_directories:
@@ -53,18 +51,11 @@ def new(path):
     else:
         logging.info('Directory %s already exists', path)
 
+# Update pip packages within the venv
 def update():
     subprocess.call(["pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"], shell=True)
 
-def docs():
-    print("""
-    Run "flare new <project-name> to create a new Flare project with a venv"
-    Run "flare start to start the venv"
-    Run "flare stop to stop the venv"
-    Run "flare update to update the Pip packages within the venv"
-    Run "flare remove to remove the venv"
-    """)
-
+# Create a venv within the Flare project directory
 def create(path):
     subprocess.call(["virtualenv {}/venv".format(path)], shell=True)
 
