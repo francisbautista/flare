@@ -22,11 +22,12 @@ def main():
     }
 
     parser = argparse.ArgumentParser(description="Flare Project Builder")
+    # group = parser.add_mutually_exclusive_group()
     parser.add_argument("new", help="Create new Flare project")
-    parser.add_argument("update", help="Update Pip Packages")
+    parser.add_argument("name", help="Create new Flare project")
     args = parser.parse_args()
     if args.new:
-        new(args.new)
+        new(args.name)
     elif args.update:
         update()
 
@@ -51,9 +52,6 @@ def new(path):
             os.mkdir(os.path.join("{}/src/".format(root_path), directory))
     else:
         logging.info('Directory %s already exists', path)
-
-def error():
-    logging.info('Input is not recognized. Try --help to see documentation.')
 
 def update():
     subprocess.call(["pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"], shell=True)
