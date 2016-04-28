@@ -21,7 +21,7 @@ def main():
     "--help": docs
     }
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Flare Project Builder")
     parser.add_argument("new", help="Create new Flare project")
     parser.add_argument("update", help="Update Pip Packages")
     args = parser.parse_args()
