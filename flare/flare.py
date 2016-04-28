@@ -7,6 +7,7 @@ import os
 import sys
 import logging
 import subprocess
+import argparse
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -19,22 +20,16 @@ def main():
     # "update": update,
     "--help": docs
     }
-    argument_list = sys.argv
 
-    if len(argument_list) < 3:
-        if argument_list[1] in options:
-            options[argument_list[1]]()
-        else:
-            error()
-    elif len(argument_list) == 0:
-        docs()
-    elif len(argument_list) == 3:
-        if argument_list[1] == "new":
-            new(argument_list[2])
-        else:
-            error()
-    else:
-        error()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("new", help="Create new Flare project")
+    parser.add_argument("update", help="Update Pip Packages")
+    args = parser.parse_args()
+    if args.new:
+        new(args.new)
+    elif args.update:
+        update()
+
 
 def new(path):
     root_path = "{}/{}".format(os.getcwd(), path)
@@ -60,8 +55,8 @@ def new(path):
 def error():
     logging.info('Input is not recognized. Try --help to see documentation.')
 
-# def update():
-#     subprocess.call(["pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"], shell=True)
+def update():
+    subprocess.call(["pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"], shell=True)
 
 def docs():
     print("""
